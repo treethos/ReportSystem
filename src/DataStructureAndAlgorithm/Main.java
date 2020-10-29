@@ -22,9 +22,11 @@ public class Main
     public static void main(String[] args)
     {//( ( 10 + 2 ) * 2 )
         Stack<String> Forcal = new Stack<String>();
-        Stack<String> TempStack = new Stack <String>();
+        Stack<String> ReversePostfix = new Stack<String>();
+        Stack<Double> ResultStack = new Stack <Double>();
         Stack<Character> Operator = new Stack<Character>();
         Queue<String> Operands = new LinkedList<>();
+        Queue<String> Postfix = new LinkedList<>();
         String result = "";
         
         System.out.print("Input: ");
@@ -93,36 +95,25 @@ public class Main
             {System.out.print(Forcal.push(Operands.remove()));}
             System.out.println(Forcal.push(String.valueOf(Operator.pop())));
         }
+
+        //System.out.println("Forcal = (stack)"+Forcal);
         //re arrange stack
-        System.out.println(Forcal);
-        while (!Forcal.isEmpty())
-        {
-            TempStack.push(Forcal.pop());
+        while(!Forcal.isEmpty()){
+            ReversePostfix.push(Forcal.pop());
         }
-
-        System.out.println(TempStack);
-
+        System.out.println("ReversePostFix = (before)(Stack)"+ReversePostfix);
+        while(!ReversePostfix.isEmpty()){
+            Postfix.add(ReversePostfix.pop());
+        }
+        System.out.println("Postfix = (after)(queue)"+Postfix);
+        System.out.println("ResultStack = "+ResultStack);
         //calculating part
-        while(!TempStack.isEmpty())
-        {
 
-            double sum;
-            double first = Double.parseDouble(TempStack.pop());
-            double second = Double.parseDouble(TempStack.pop());
-            char op = TempStack.peek().charAt(0);
-                switch(op)
-                {
-                    case'+':
-                    sum = first+second; TempStack.push(String.valueOf(sum)); break;
-                    case'-':
-                    sum = first-second; TempStack.push(String.valueOf(sum)); break;
-                    case'*': 
-                    sum = first*second; TempStack.push(String.valueOf(sum)); break;
-                    case'/': 
-                    sum = first/second; TempStack.push(String.valueOf(sum)); break;
-                }
+
+
+
+
+
             
         }
-        System.out.println(TempStack);
-    }
 }
